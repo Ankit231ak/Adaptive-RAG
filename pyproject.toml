@@ -1,7 +1,7 @@
 [project]
 name = "adaptive-rag"
 version = "0.1.0"
-description = "Add your description here"
+description = "Adaptive RAG - Evidence-State Retrieval Controller"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -10,4 +10,9 @@ dependencies = [
     "sentence-transformers>=6.0.1",
     "torch>=2.14.0",
     "transformers>=5.16.1",
+    "pandas>=3.0.5",
+    "pyyaml>=6.0.3",
+    "numpy>=2.4.6",
+    "tqdm>=4.70.0",
+    "requests>=2.34.2",
 ]
