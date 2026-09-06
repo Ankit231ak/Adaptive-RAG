@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .DS_Store
 adaptive_rag_complete_master_project_plan_FINAL.pdf
+data/**/*.json
+data/*.json
+*.jsonl
+*.parquet

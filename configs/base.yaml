@@ -1,0 +1,20 @@
+# Base Configuration for Adaptive-RAG Project
+
+project_name: "Adaptive-RAG"
+seed: 42
+
+paths:
+  raw_dev_data: "data/hotpotqa/hotpot_dev_distractor_v1.json"
+  raw_train_data: "data/hotpotqa/hotpot_train_v1.1.json"
+  splits_dir: "data/splits"
+  processed_dir: "data/processed"
+
+sample:
+  tiny_sample_size: 20
+  dev_sample_size: 1000
+  train_sample_size: 2000
+
+corpus:
+  hash_algorithm: "sha256"
+  doc_id_prefix: "doc_"
+  id_length: 12
