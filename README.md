@@ -2,6 +2,7 @@
 
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![Package Manager: uv](https://img.shields.io/badge/package_manager-uv-astral.svg)](https://github.com/astral-sh/uv)
+[![Dataset: HotpotQA](https://img.shields.io/badge/dataset-HotpotQA-green.svg)](https://hotpotqa.github.io/)
 
 Adaptive RAG is a research repository building a post-retrieval evidence-state controller that dynamically predicts whether an additional retrieval batch (e.g. $k=5 \to k=10$) will materially improve answer quality.
 
@@ -13,6 +14,9 @@ Adaptive RAG is a research repository building a post-retrieval evidence-state c
   - [Role-Based Module Directories (`src/`)](#role-based-module-directories-src)
   - [Version-Controlled Files](#version-controlled-files)
   - [Gitignored / Local Files](#gitignored--local-files)
+- [Dataset & Corpus Pipeline](#dataset--corpus-pipeline)
+  - [HotpotQA Dataset Status](#hotpotqa-dataset-status)
+  - [Stable Document ID Formula](#stable-document-id-formula)
 - [Core Workflows & Commands](#core-workflows--commands)
 
 ---
@@ -91,6 +95,28 @@ Adaptive-RAG/
 | `src/generation_and_eval/` | **Member C (Utsav)** | Prompt formatting, generator wrapper, HotpotQA normalization, EM/F1. |
 | `src/method_and_controller/` | **Member A (Deepak)** | Post-retrieval evidence feature extraction, oracle labels, router classifier. |
 | `src/pipeline/` | Integration | End-to-end pipeline linking Retriever, Controller, and Generator. |
+
+---
+
+## Dataset & Corpus Pipeline
+
+Full dataset documentation is maintained in [data/datasets.md](file:///Users/d.k./Desktop/Adaptive-RAG/data/datasets.md).
+
+### HotpotQA Dataset Status
+
+The HotpotQA dataset (`distractor` setting) is downloaded and formatted in `data/hotpotqa/`:
+
+| Dataset Split | Local File Path | File Size | Question Count | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **Train Set** | `data/hotpotqa/hotpot_train_v1.1.json` | **619.96 MB** | **90,447** | Downloaded & Verified |
+| **Dev (Distractor)** | `data/hotpotqa/hotpot_dev_distractor_v1.json` | **51.22 MB** | **7,405** | Downloaded & Verified |
+
+### Stable Document ID Formula
+Each document paragraph in the corpus is assigned a deterministic, stable ID derived from SHA-256 hashing:
+
+$$\text{doc\_id} = \text{"doc\_"} + \text{SHA256}(\text{title} + "\backslash\text{n}" + \text{text})[:12]$$
+
+This guarantees document IDs are 100% reproducible across all environments, processes, and re-indexed files.
 
 ---
 
