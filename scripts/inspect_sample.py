@@ -8,7 +8,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.common import load_config, set_seed
+from src import load_config, set_seed
 from src.data_and_retrieval import create_sample_dataset, generate_stable_doc_id
 
 

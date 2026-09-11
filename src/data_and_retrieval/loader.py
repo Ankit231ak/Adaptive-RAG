@@ -6,7 +6,7 @@ from dataclasses import dataclass, field, asdict
 import json
 import random
 from typing import Dict, List, Optional, Tuple, Any
-from src.data_and_retrieval.corpus import Corpus, Document
+from src.corpus import Corpus, Document
 
 
 @dataclass
