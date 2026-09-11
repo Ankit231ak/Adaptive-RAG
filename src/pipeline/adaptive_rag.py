@@ -7,8 +7,8 @@ import time
 from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
 
-from src import Corpus, Document, DenseRetriever, RetrievedDoc
-from src import (
+from src.data_and_retrieval import Corpus, Document, DenseRetriever, RetrievedDoc
+from src.generation_and_eval import (
     GeneratorWrapper,
     GeneratorOutput,
     normalize_answer,
@@ -18,7 +18,7 @@ from src import (
     mrr_at_k,
     supporting_fact_coverage
 )
-from src import (
+from src.method_and_controller import (
     EvidenceFeatures,
     extract_evidence_features,
     validate_evidence_features,

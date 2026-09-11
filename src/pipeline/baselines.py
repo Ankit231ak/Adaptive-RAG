@@ -6,8 +6,8 @@ from dataclasses import dataclass, asdict
 import time
 from typing import Dict, List, Optional, Any
 
-from src import Corpus, DenseRetriever, RetrievedDoc
-from src import (
+from src.data_and_retrieval import Corpus, DenseRetriever, RetrievedDoc
+from src.generation_and_eval import (
     GeneratorWrapper,
     GeneratorOutput,
     exact_match_score,
