@@ -1,6 +1,6 @@
 # Research Reading & Literature Checkpoint Notes (5–10 September)
 
-**Team Lead Review**: Deepak (Method & Controller), Ankit (Retrieval & Data), Utsav (Generation & Evaluation)  
+**Team Lead Review**: Member A (Method & Controller), Member B (Retrieval & Data), Member C (Generation & Evaluation)  
 **Guidelines**: Every paper is analyzed using the 5 mandatory questions from Section 12 of the Master Project Plan.
 
 ---

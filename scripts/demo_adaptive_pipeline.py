@@ -1,7 +1,6 @@
 import sys
 import os
 import time
-import json
 import logging
 import numpy as np
 
@@ -24,14 +23,15 @@ BOLD = "\033[1m"
 
 def run_demo():
     print(CYAN + BOLD + "\n" + "="*70)
-    print("   ADAPTIVE RAG PIPELINE VISUALIZATION DEMO (GRADIENT BOOSTING)")
+    print("   ADAPTIVE RAG PIPELINE - MANUAL QUERY DEMO (GRADIENT BOOSTING)")
     print("="*70 + RESET + "\n")
     
     config = load_config()
     test_file = config["paths"]["raw_dev_data"]
     
     print(YELLOW + "[1] Initializing Pipeline Components..." + RESET)
-    questions, corpus = create_sample_dataset(test_file, sample_size=10, seed=123)
+    # Load 50 random unseen questions just to show the user some examples
+    questions, corpus = create_sample_dataset(test_file, sample_size=50, seed=999)
     embedder = OllamaEmbeddingModel(model_name="qwen3-embedding:4b", dimension=4096)
     retriever = DenseRetriever(corpus=corpus, embedding_model=embedder)
     retriever.build_index()
@@ -39,15 +39,24 @@ def run_demo():
     router = ControllerRouter(tau=config["controller"]["tau"])
     router.load(os.path.join(config["paths"]["results_raw_dir"], "controller_router.pkl"))
     
-    print(YELLOW + "\n[2] Pipeline Ready! Processing a random query:\n" + RESET)
-    q = questions[4]
-    print(WHITE + BOLD + f"USER QUERY: {q.question}\n" + RESET)
+    print(YELLOW + "\n[2] Pipeline Ready!\n" + RESET)
+    print("Here are 3 example questions from the unseen dataset you can try:")
+    print(f"  1. {questions[11].question}")
+    print(f"  2. {questions[22].question}")
+    print(f"  3. {questions[33].question}\n")
     
-    time.sleep(1)
-    print(GREEN + "--- STEP 1: INITIAL RETRIEVAL (k=5) ---" + RESET)
+    user_q = input(WHITE + BOLD + "Enter your custom question (or press Enter for a random one): " + RESET).strip()
+    
+    if not user_q:
+        q_obj = questions[44]
+        user_q = q_obj.question
+        print(CYAN + f"\nUsing random question: {user_q}" + RESET)
+    
+    print(GREEN + "\n--- STEP 1: INITIAL RETRIEVAL (k=5) ---" + RESET)
     start_time = time.time()
-    query_emb = embedder.embed_query(q.question)
-    top5_docs = retriever.retrieve(q.question, top_k=5, candidate_doc_ids=q.context_doc_ids)
+    query_emb = embedder.embed_query(user_q)
+    # Retrieve without candidate IDs so it searches the full FAISS database
+    top5_docs = retriever.retrieve(user_q, top_k=5)
     print(f"Retrieved 5 documents in {time.time() - start_time:.2f} seconds.")
     
     time.sleep(1)
@@ -78,19 +87,19 @@ def run_demo():
         print(RED + BOLD + f"-> PREDICTION: [MORE] (Confidence: {prob:.1%})")
         print("-> REASON: Evidence is weak or ambiguous. Triggering deeper retrieval (k=10)." + RESET)
         print(GREEN + "\n--- STEP 3.5: DEEP RETRIEVAL (k=10) ---" + RESET)
-        final_docs = retriever.retrieve(q.question, top_k=10, candidate_doc_ids=q.context_doc_ids)
+        final_docs = retriever.retrieve(user_q, top_k=10)
         
     time.sleep(1)
     print(GREEN + "\n--- STEP 4: LLM GENERATION ---" + RESET)
-    pass # context = "\n".join([f"Doc {i+1}: {d.doc.text}" for i, d in enumerate(final_docs)])
+    docs_only = [rd.doc for rd in final_docs]
     print(f"Sending {len(final_docs)} documents to Qwen2.5:7b...")
     
     gen_start = time.time()
-    docs_only = [rd.doc for rd in final_docs]
-    gen_out = generator.generate(q.question, docs_only)
+    gen_out = generator.generate(user_q, docs_only)
     
     print(WHITE + BOLD + f"\n[FINAL ANSWER]: {gen_out.answer}" + RESET)
-    print(YELLOW + f"\nPipeline Complete. Total Time: {time.time() - start_time:.2f}s | Tokens Consumed: {gen_out.input_tokens + gen_out.output_tokens}" + RESET)
+    total_tokens = gen_out.input_tokens + gen_out.output_tokens
+    print(YELLOW + f"\nPipeline Complete. Total Time: {time.time() - start_time:.2f}s | Tokens Consumed: {total_tokens}" + RESET)
 
 if __name__ == "__main__":
     run_demo()

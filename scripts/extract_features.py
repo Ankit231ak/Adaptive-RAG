@@ -1,9 +1,9 @@
 """
 Day 6 Milestone: Evidence-State Feature Extraction & Distribution Validation.
 Roles:
-- Member A (Deepak): Extract 7 V1 features (s1, mean, std, margin, range, max_sim, redundancy).
-- Member B (Ankit): Validate score distributions, duplicate behavior, redundancy bounds.
-- Member C (Utsav): Feature logger + analysis script producing CSV and JSONL.
+- Member A: Extract 7 V1 features (s1, mean, std, margin, range, max_sim, redundancy).
+- Member B: Validate score distributions, duplicate behavior, redundancy bounds.
+- Member C: Feature logger + analysis script producing CSV and JSONL.
 """
 import argparse
 import csv
@@ -110,7 +110,7 @@ def main():
         writer.writerows(feature_records)
     print(f"✔ Saved CSV to: {csv_path}")
 
-    # Distribution statistics (Ankit's validation requirement)
+    # Distribution statistics (Member B's validation requirement)
     print("\n-------------------------------------------------------------------------")
     print("         EVIDENCE-STATE FEATURES STATISTICAL SUMMARY (N = %d)           " % len(feature_records))
     print("-------------------------------------------------------------------------")

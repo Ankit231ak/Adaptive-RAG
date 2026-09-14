@@ -1,6 +1,6 @@
 """
 HotpotQA raw data loader and sampling routines.
-Owner: Member B (Data & Retrieval - Ankit)
+Owner: Member B (Data & Retrieval)
 """
 from dataclasses import dataclass, field, asdict
 import json

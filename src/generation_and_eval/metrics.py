@@ -1,6 +1,6 @@
 """
 Evaluation metrics: Answer quality (EM/F1) and Retrieval accuracy (Recall@k, MRR).
-Owner: Member C (Generation & Evaluation - Utsav)
+Owner: Member C (Generation & Evaluation)
 """
 from collections import Counter
 import re

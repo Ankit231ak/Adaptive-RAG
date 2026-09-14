@@ -1,6 +1,6 @@
 # V1 Post-Retrieval Evidence-State Feature Dictionary
 
-**Document Owner**: Member A (Deepak — Method & Controller)  
+**Document Owner**: Member A (Member A — Method & Controller)  
 **Milestone**: Day 6 (10 September 2026)  
 **Status**: Frozen for V1 Controller Experimentation  
 

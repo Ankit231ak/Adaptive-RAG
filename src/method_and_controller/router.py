@@ -1,6 +1,6 @@
 """
 Logistic Regression STOP/MORE Controller Router.
-Owner: Member A (Method & Controller - Deepak)
+Owner: Member A (Method & Controller)
 """
 import os
 import pickle

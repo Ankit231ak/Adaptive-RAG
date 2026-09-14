@@ -1,6 +1,6 @@
 """
 LLM Generator Wrapper with fixed prompt template, Ollama model support, and token/latency logging.
-Owner: Member C (Generation & Evaluation - Utsav)
+Owner: Member C (Generation & Evaluation)
 """
 from dataclasses import dataclass
 import logging

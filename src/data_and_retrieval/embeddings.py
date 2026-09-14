@@ -1,6 +1,6 @@
 """
 Dense Embedding Interface supporting local SentenceTransformers and Ollama Embeddings.
-Owner: Member B (Data & Retrieval - Ankit)
+Owner: Member B (Data & Retrieval)
 """
 from abc import ABC, abstractmethod
 import logging
