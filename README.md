@@ -44,9 +44,9 @@ By attaching the Gradient Boosting ML Controller to the post-retrieval state, th
 Below is a comprehensive guide to every meaningful file in this project and why it exists. *(Note: Standard auto-generated configuration and environment files like `.venv`, `.gitignore`, `uv.lock`, and the `docs/` folder have been excluded for brevity).*
 
 ### 1. Source Code (`src/`)
-This is where the core logic of the pipeline lives. It is divided among the three team members.
+This is where the core logic of the pipeline lives. 
 
-#### Member B - Data & Retrieval Pipeline
+#### Data & Retrieval Pipeline
 * **`src/data_and_retrieval/corpus.py`**
   * **Purpose:** Handles creating unique hashes (SHA-256) for documents.
   * **Why it's necessary:** Ensures that every piece of text we retrieve has a consistent, permanent ID, preventing duplicate context blocks from being fed to the LLM.
@@ -60,7 +60,7 @@ This is where the core logic of the pipeline lives. It is divided among the thre
   * **Purpose:** Contains the FAISS Vector Store logic (and exact-match NumPy fallback) to rapidly search embeddings.
   * **Why it's necessary:** To instantly fetch the top 5 or 10 most relevant documents from thousands of possible chunks without crashing.
 
-#### Member C - Generation & Evaluation Pipeline
+#### Generation & Evaluation Pipeline
 * **`src/generation_and_eval/generator.py`**
   * **Purpose:** Connects to the local Ollama LLM (`qwen3.5:latest`) and builds the prompt structures (Direct vs RAG context).
   * **Why it's necessary:** This is the "brain" that actually reads the retrieved documents and types out the final answer to the user's question.
@@ -68,7 +68,7 @@ This is where the core logic of the pipeline lives. It is divided among the thre
   * **Purpose:** Houses mathematical scoring formulas like Exact Match (EM), F1-Score, MRR, and Recall.
   * **Why it's necessary:** We need hard numbers to prove if our answers are actually getting better.
 
-#### Member A - Method & Controller Pipeline
+#### Method & Controller Pipeline
 * **`src/method_and_controller/evidence_state.py`**
   * **Purpose:** Calculates the 7 statistical features from the top-5 retrieved documents (e.g., standard deviation of scores, max similarity).
   * **Why it's necessary:** The system uses these features to understand its own confidence levels. If the features look bad, the system knows it needs to retrieve more information.
@@ -81,7 +81,7 @@ This is where the core logic of the pipeline lives. It is divided among the thre
 
 #### Top-Level Pipelines & Shims
 * **`src/pipeline/adaptive_rag.py`**
-  * **Purpose:** The master orchestration file that chains Member B's Retriever, Member A's Controller, and Member C's Generator together into a single pipeline.
+  * **Purpose:** The master orchestration file that chains the Retriever, Controller, and Generator together into a single pipeline.
 * **`src/pipeline/baselines.py`**
   * **Purpose:** Executes the 5 standard control-group experiments (B0 - B4).
 * **`src/*.py` Shims (e.g. `src/router.py`)**

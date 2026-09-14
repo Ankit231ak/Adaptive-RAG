@@ -1,6 +1,5 @@
 """
 Corpus representation and stable document ID management.
-Owner: Member B (Data & Retrieval)
 """
 from dataclasses import dataclass, field, asdict
 import hashlib

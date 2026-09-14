@@ -1,6 +1,5 @@
 """
 FAISS Vector Store and Dense Retriever Implementation.
-Owner: Member B (Data & Retrieval)
 """
 from dataclasses import dataclass
 import logging

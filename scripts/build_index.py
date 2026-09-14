@@ -1,6 +1,5 @@
 """
 Build FAISS Index Script.
-Owner: Member B (Data & Retrieval)
 Builds corpus, encodes dense embeddings, and creates/saves FAISS index.
 """
 import argparse

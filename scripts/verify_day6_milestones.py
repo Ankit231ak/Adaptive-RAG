@@ -1,6 +1,5 @@
 """
 Master Verification Script for all deliverables up to 10 September (Days 1 - 6).
-Verifies all deliverables for Member A, Member B, and Member C.
 """
 import os
 import sys
@@ -54,7 +53,6 @@ class TestDay1To6Milestones(unittest.TestCase):
         cls.examples, cls.corpus = create_sample_dataset(cls.raw_path, sample_size=20, seed=42)
 
     # -------------------------------------------------------------------------
-    # Member B - Data & Retrieval Tests (Days 1 - 6)
     # -------------------------------------------------------------------------
 
     def test_member_b_stable_doc_id_determinism(self):
@@ -125,7 +123,6 @@ class TestDay1To6Milestones(unittest.TestCase):
         self.assertEqual(mrr, 0.5)  # first gold doc_b is at rank 2 -> 1/2
 
     # -------------------------------------------------------------------------
-    # Member C - Generation & Evaluation Tests (Days 1 - 6)
     # -------------------------------------------------------------------------
 
     def test_member_c_generator_and_ollama_space(self):
@@ -153,7 +150,6 @@ class TestDay1To6Milestones(unittest.TestCase):
         self.assertGreater(f1, 0.6)
 
     # -------------------------------------------------------------------------
-    # Member A - Method & Controller Tests (Days 1 - 6)
     # -------------------------------------------------------------------------
 
     def test_member_a_seven_v1_features_extraction(self):

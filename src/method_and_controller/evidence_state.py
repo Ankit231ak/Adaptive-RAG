@@ -1,6 +1,5 @@
 """
 V1 Post-Retrieval Evidence State Features.
-Owner: Member A (Method & Controller)
 
 Implements the seven V1 evidence-state features extracted strictly after initial top-5 retrieval:
 1. Top-1 score: s1

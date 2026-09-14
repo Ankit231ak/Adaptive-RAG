@@ -1,6 +1,5 @@
 """
 Oracle labelling logic for training controller.
-Owner: Member A (Method & Controller)
 
 Computes delta-F1 = F1@10 - F1@5 and labels MORE if delta-F1 > delta_threshold, else STOP.
 Note: Oracle labels are strictly for training/validation supervision; never available at test inference.
