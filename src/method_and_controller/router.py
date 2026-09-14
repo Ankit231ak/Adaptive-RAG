@@ -6,7 +6,7 @@ import os
 import pickle
 from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler
 
 
@@ -19,7 +19,7 @@ class ControllerRouter:
     def __init__(self, tau: float = 0.5):
         self.tau = tau
         self.scaler = StandardScaler()
-        self.model = LogisticRegression(class_weight="balanced", max_iter=500, random_state=42)
+        self.model = GradientBoostingClassifier(n_estimators=100, max_depth=3, random_state=42)
         self.is_trained = False
 
     def train(self, feature_vectors: List[List[float]], labels: List[str]):

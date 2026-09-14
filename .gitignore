@@ -1,9 +1,27 @@
+# Environments
 .venv/
+env/
+venv/
 __pycache__/
 *.pyc
 .DS_Store
-adaptive_rag_complete_master_project_plan_FINAL.pdf
+
+# Large Data & Vector DB Files
 data/**/*.json
 data/*.json
-*.jsonl
+data/**/*.npz
+data/**/*.bin
 *.parquet
+
+# Heavy Results & Outputs
+results/raw/*.json
+results/raw/*.jsonl
+results/raw/*.pkl
+!results/tables/*.csv  # Allow pushing the small CSV summaries!
+
+# Archives
+*.zip
+*.tar.gz
+
+# PDFs
+*.pdf

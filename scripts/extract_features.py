@@ -17,11 +17,11 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from src import load_config, set_seed
 from src.data_and_retrieval import create_sample_dataset, DenseRetriever
-from src import (
+from src.method_and_controller import (
     EvidenceFeatures,
     extract_evidence_features,
     validate_evidence_features,
-    FEATURE_NAMES
+
 )
 
 
@@ -118,6 +118,7 @@ def main():
     print("-" * 72)
 
     stats_summary = {}
+    FEATURE_NAMES = ["top1_score", "mean_score", "score_std", "margin_top1_top2", "score_range", "max_similarity", "mean_redundancy"]
     for f_name in FEATURE_NAMES:
         vals = [r[f_name] for r in feature_records]
         mean_v = float(np.mean(vals))

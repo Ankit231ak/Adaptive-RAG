@@ -6,6 +6,10 @@ from dataclasses import dataclass, asdict
 import time
 from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
+import logging
+
+logger = logging.getLogger(__name__)
+from logging import Logger
 
 from src.data_and_retrieval import Corpus, Document, DenseRetriever, RetrievedDoc
 from src.generation_and_eval import (

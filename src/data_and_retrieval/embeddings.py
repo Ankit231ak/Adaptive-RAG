@@ -117,7 +117,11 @@ class OllamaEmbeddingModel(BaseEmbeddingModel):
             
             all_embeddings = []
             print(f"\\nSending {len(texts)} documents to Ollama for embedding in chunks of {chunk_size}...")
-            for i in tqdm(range(0, len(texts), chunk_size), desc="Ollama Embedding"):
+            if len(texts) > 1:
+                iterator = tqdm(range(0, len(texts), chunk_size), desc="Ollama Embedding")
+            else:
+                iterator = range(0, len(texts), chunk_size)
+            for i in iterator:
                 chunk = texts[i:i + chunk_size]
                 res = requests.post(
                     f"{self.base_url}/api/embed",
