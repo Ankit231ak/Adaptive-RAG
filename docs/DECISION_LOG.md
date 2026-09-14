@@ -67,7 +67,7 @@
 
 ## 3. Daily Milestones Completion Register (Days 1 to 6)
 
-| Date | Milestone | Member A | Member B | Member C | Evidence / Artifact |
+| Date | Milestone | Evidence / Artifact |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **5 Sep (Day 1)** | Kickoff & runnable skeleton | Method spec & state machine | Tiny HotpotQA sample & stable IDs | Fixed prompt & EM/F1 skeleton | `results/raw/hello_world_run.json` |
 | **6 Sep (Day 2)** | Freeze V1 controller spec & literature | STOP/MORE interface spec | Dense retriever + FAISS plan | Prompt parser & answer types | `docs/READING_NOTES.md` (Adaptive-RAG + Self-RAG) |
