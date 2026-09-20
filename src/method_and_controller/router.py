@@ -2,7 +2,7 @@
 Logistic Regression STOP/MORE Controller Router.
 """
 import os
-import pickle
+import joblib
 from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
 from sklearn.ensemble import GradientBoostingClassifier
@@ -55,12 +55,12 @@ class ControllerRouter:
         """Save model and scaler to disk."""
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         with open(filepath, "wb") as f:
-            pickle.dump({"scaler": self.scaler, "model": self.model, "tau": self.tau, "is_trained": self.is_trained}, f)
+            joblib.dump({"scaler": self.scaler, "model": self.model, "tau": self.tau, "is_trained": self.is_trained}, f)
 
     def load(self, filepath: str):
         """Load model and scaler from disk."""
         with open(filepath, "rb") as f:
-            data = pickle.load(f)
+            data = joblib.load(f)
             self.scaler = data["scaler"]
             self.model = data["model"]
             self.tau = data.get("tau", 0.5)

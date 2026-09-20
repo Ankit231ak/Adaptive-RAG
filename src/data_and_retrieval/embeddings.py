@@ -115,8 +115,9 @@ class OllamaEmbeddingModel(BaseEmbeddingModel):
             chunk_size = 10
             
             all_embeddings = []
-            print(f"\\nSending {len(texts)} documents to Ollama for embedding in chunks of {chunk_size}...")
+
             if len(texts) > 1:
+                print(f"\nSending {len(texts)} documents to Ollama for embedding in chunks of {chunk_size}...")
                 iterator = tqdm(range(0, len(texts), chunk_size), desc="Ollama Embedding")
             else:
                 iterator = range(0, len(texts), chunk_size)

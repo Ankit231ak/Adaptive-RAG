@@ -33,7 +33,7 @@ evaluation:
     answer: ["exact_match", "f1", "precision", "recall"]
     retrieval: ["recall_at_3", "recall_at_5", "recall_at_10", "mrr", "supporting_fact_coverage"]
     efficiency: ["latency_sec", "input_tokens", "output_tokens", "retrieved_count"]
-  sample_size: 50
+  sample_size: 1000
   random_seed: 42
 
 features_day6:

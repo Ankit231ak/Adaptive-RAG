@@ -17,8 +17,8 @@ def run_evaluation():
     config = load_config()
     test_file = config["paths"]["raw_dev_data"]
     
-    print("Loading 5 test questions from dev set...")
-    questions, corpus = create_sample_dataset(raw_file_path=test_file, sample_size=5, seed=123)
+    print("Loading 10 test questions from dev set...")
+    questions, corpus = create_sample_dataset(raw_file_path=test_file, sample_size=30, seed=13)
     
     print("Initializing components...")
     embedder = OllamaEmbeddingModel(model_name="qwen3-embedding:4b", dimension=4096)
@@ -29,6 +29,7 @@ def run_evaluation():
     
     router = ControllerRouter(tau=config["controller"]["tau"])
     router_path = os.path.join(config["paths"]["results_raw_dir"], "controller_router.pkl")
+    print(router_path)
     if os.path.exists(router_path):
         router.load(router_path)
     else:
@@ -42,7 +43,7 @@ def run_evaluation():
         config=config
     )
     
-    print(f"\nRunning Adaptive Pipeline on 5 test questions...")
+    print(f"\nRunning Adaptive Pipeline on 20 test questions...")
     results = []
     for idx, q in enumerate(questions, 1):
         print(f"\nProcessing Q{idx}: {q.question[:50]}...")
