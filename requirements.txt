@@ -10,3 +10,5 @@ pyyaml>=6.0.3
 numpy>=2.4.6
 tqdm>=4.70.0
 requests>=2.34.2
+matplotlib>=3.11.0
+

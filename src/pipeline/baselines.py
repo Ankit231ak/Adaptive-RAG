@@ -186,3 +186,28 @@ class BaselineRunner:
             mrr=round(mrr, 4),
             supporting_fact_cov=round(sf_cov, 4)
         )
+
+    def run_adaptive_rag_complexity(self, example: Any) -> BaselineResult:
+        """Baseline B5: Adaptive-RAG (Jeong et al.) question-complexity routing before retrieval."""
+        q_text = example.question.strip()
+        tokens = q_text.split()
+        q_len = len(tokens)
+        q_lower = q_text.lower()
+
+        # Pre-retrieval complexity estimation
+        is_comparison = any(kw in q_lower for kw in ["both", "more", "less", "older", "younger", "between", "either", "same"])
+        is_chain = any(kw in q_lower for kw in ["where was the", "who was the", "which film", "what team"]) and q_len > 14
+
+        if is_comparison or is_chain or q_len > 18:
+            # Complex query -> Multi-hop retrieval (k=10)
+            res = self.run_fixed_rag(example, k=10)
+        elif q_len <= 7 and not any(kw in q_lower for kw in ["who", "what", "where", "when"]):
+            # Simple query -> Direct parametric (k=0)
+            res = self.run_direct_llm(example)
+        else:
+            # Moderate query -> Standard retrieval (k=5)
+            res = self.run_fixed_rag(example, k=5)
+
+        res.baseline_id = "B5_Adaptive_RAG_Complexity"
+        return res
+

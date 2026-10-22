@@ -3,6 +3,7 @@ Adaptive RAG Pipeline Implementation.
 Links Retriever (FAISS/Dense), Evidence State (7 V1 features), Controller (STOP/MORE), and Generator (Ollama/Extractive).
 """
 from dataclasses import dataclass, asdict
+import os
 import time
 from typing import Dict, List, Optional, Tuple, Any
 import numpy as np
@@ -83,7 +84,14 @@ class AdaptiveRAGPipeline:
         self.config = config or {}
         self.retriever = retriever or DenseRetriever(corpus, config=self.config)
         self.generator = generator or GeneratorWrapper(config=self.config)
-        self.router = router or ControllerRouter(tau=self.config.get("controller", {}).get("tau", 0.5))
+        if router is not None:
+            self.router = router
+        else:
+            self.router = ControllerRouter(tau=self.config.get("controller", {}).get("tau", 0.3))
+            router_file = os.path.join(self.config.get("paths", {}).get("results_raw_dir", "results/raw"), "controller_router.pkl")
+            if os.path.exists(router_file):
+                self.router.load(router_file)
+                logger.info(f"Loaded trained GBDT controller from {router_file}")
         self.activate_adaptation = activate_adaptation
 
     def run_single(

@@ -18,7 +18,7 @@ def run_evaluation():
     test_file = config["paths"]["raw_dev_data"]
     
     print("Loading 10 test questions from dev set...")
-    questions, corpus = create_sample_dataset(raw_file_path=test_file, sample_size=30, seed=13)
+    questions, corpus = create_sample_dataset(raw_file_path=test_file, sample_size=50, seed=420 )
     
     print("Initializing components...")
     embedder = OllamaEmbeddingModel(model_name="qwen3-embedding:4b", dimension=4096)
